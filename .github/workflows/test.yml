@@ -1,0 +1,23 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: forge build
+      - run: forge test -vv
+      - run: python model/reference.py --steps 1000000 --seed 38
