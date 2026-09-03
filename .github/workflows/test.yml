@@ -21,3 +21,4 @@ jobs:
       - run: forge build
       - run: forge test -vv
       - run: python model/reference.py --steps 1000000 --seed 38
+      - run: python model/launch_guard_reference.py --steps 1000000 --seed 304
